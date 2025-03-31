@@ -34,3 +34,6 @@ Note: Migrations were removed for this assignment. If you encounter errors relat
    ```sh
    Add-Migration InitialCreate
    Update-Database
+
+## License
+This project is licenced under the MIT license. That license was chosen due to its simplicity and permissions. It allows others to freely use and modify the software with minimal restrictions while limiting liability for the author, making it a good choice to encourage collaboration.
