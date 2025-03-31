@@ -13,7 +13,7 @@ This project is capstone project built with ASP.NET Core. It's a messaging app t
 - Git
 
 #### **Local Environment Requirements:**
-- A local instance of **SQL Server**.
+- A local instance of SQL Server. You'll need to create your own instance of "appsettings.json".
 
 ---
 
