@@ -1,0 +1,229 @@
+﻿@* Style *@
+<style>
+    .chat-widget {
+        position: fixed;
+        bottom: 65px;
+        right: 55px;
+        width: 70px;
+        height: 70px;
+        background-color: #d3d3d3;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .chat-widget:hover {
+        background-color: #a9a9a9;
+    }
+
+    .chat-img {
+        object-fit: contain;
+        width: 30px;
+        height: 30px;
+    }
+
+    /* Global unread badge */
+    .global-badge {
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(50%, -50%);
+        font-size: 0.75rem;
+        display: none;
+    }
+
+    .chat-window {
+        display: none;
+        width: 400px;
+        max-width: 95vw;
+        height: auto;
+        max-height: 400px;
+        background-color: white;
+        position: absolute;
+        bottom: 40px;
+        right: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+        z-index: 100;
+        overflow: hidden;
+    }
+
+    .chat-window-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: fit-content;
+        padding: 5px 15px;
+    }
+
+    .icons {
+        display: flex;
+        align-items: center;
+    }
+
+    .icons > * {
+        cursor: pointer;
+    }
+
+    .conversation {
+        background-color: white;
+        cursor: pointer;
+        padding: 10px;
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+    }
+
+    .conversation:hover {
+        background-color: #d3d3d3;
+        color: black;
+    }
+
+    .conversation p {
+        max-width: 380px;
+        max-height: 50px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .active-chats {
+        max-height: 260px; 
+        overflow-y: auto;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    @@media (max-width: 500px) {
+        .chat-window {
+            width: 90vw;
+            right: 5vw;
+        }
+
+        .conversation p {
+            max-width: 100%;
+        }
+    }
+</style>
+
+@* Chat widget with a global unread badge *@
+<div title="View Recent Conversations" style="position: relative;">
+    <div class="chat-widget" onclick="getRecentConversations()">
+        <img src="~/images/chat.png" class="chat-img" />
+        <span id="globalUnreadBadge" class="badge bg-danger rounded-circle global-badge">0</span>
+    </div>
+</div>
+
+@* Chat window *@
+<div class="chat-window">
+    <div class="chat-window-header flex">
+        <h4>Recent Conversations</h4>
+        <div class="icons">
+            <i class="bi bi-x fs-1 mx-lg-1" onclick="hideChatWindow()"></i>
+        </div>
+    </div>
+
+    <div class="active-chats">
+    </div>
+</div>
+
+<script>
+    //Hide chat window when close button is clicked
+    function hideChatWindow() {
+        const chatWindow = document.querySelector(".chat-window");
+        const chatWidget = document.querySelector(".chat-widget");
+        chatWindow.style.display = "none";
+        chatWidget.style.display = "flex";
+    }
+
+    //Hide chat-widget, fetch recent conversations
+    async function getRecentConversations() {
+        const chatWindow = document.querySelector(".chat-window");
+        const activeChatsDiv = document.querySelector(".active-chats");
+        const chatWidget = document.querySelector(".chat-widget");
+
+        chatWidget.style.display = "none";
+        chatWindow.style.display = "block";
+        activeChatsDiv.innerHTML = "";
+
+        var recentConversations = await fetchRecentConversations();
+        updateGlobalUnreadBadge(recentConversations);
+        if (recentConversations.length !== 0) {
+            recentConversations.forEach(conversation => {
+                const timestamp = conversation.lastMessageTimestamp;
+                const date = new Date(timestamp);
+                const time = date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+                // Prepare red badge and bold text if there are missed messages
+                var badge = "";
+                if (conversation.missedCount > 0) {
+                    badge = `<span class="badge bg-danger ms-2">${conversation.missedCount}</span>`;
+                }
+                var messageText = conversation.lastMessage;
+                if (conversation.missedCount > 0) {
+                    messageText = `<b>${conversation.lastMessage}</b>`;
+                }
+                var content = `
+                        <a href="/Messaging/Index?studentId=${conversation.student.userId}&studentName=${conversation.student.name}">
+                            <div class="conversation">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h4>${conversation.student.name}${badge}</h4>
+                                    <span>${time}</span>
+                                </div>
+                                <p>${messageText}</p>
+                            </div>
+                        </a>
+                    `;
+                activeChatsDiv.innerHTML += content;
+            });
+        } else {
+            activeChatsDiv.innerHTML = `<div class="text-center mt-2">No Conversations</div>`;
+        }
+    }
+
+    // Update global unred badge on the chat widget
+    function updateGlobalUnreadBadge(recentConversations) {
+        let totalMissed = 0;
+        recentConversations.forEach(conversation => {
+            totalMissed += conversation.missedCount;
+        });
+        const badgeEl = document.getElementById("globalUnreadBadge");
+        if (totalMissed > 0) {
+            badgeEl.innerText = totalMissed;
+            badgeEl.style.display = "block";
+        } else {
+            badgeEl.style.display = "none";
+        }
+    }
+    //Updated grammar ;p
+    async function fetchRecentConversations() {
+        try {
+            const response = await fetch('/Messaging/GetRecentConversations');
+            if (!response.ok) {
+                throw new Error("Couldn't get recent conversations");
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error(error);
+            return [];
+        }
+    }
+
+    async function pollGlobalUnreadBadge() {
+        try {
+            const recentConversations = await fetchRecentConversations();
+            updateGlobalUnreadBadge(recentConversations);
+        } catch (e) {
+            console.error(e);
+        }
+    }
+    setInterval(pollGlobalUnreadBadge, 30000);
+
+    pollGlobalUnreadBadge();
+</script>

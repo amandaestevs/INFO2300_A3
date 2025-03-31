@@ -1,0 +1,647 @@
+/* General Page Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 70px;
+}
+.navbar .nav-link.dropdown-toggle {
+    color: #000 !important;
+}
+/* Site-wide footer */
+.custom-footer {
+    position: fixed;
+    bottom: 0; 
+    left: 0;
+    width: 100%;
+    background-color: #f8f9fa; 
+    padding: 20px 0; 
+    border-top: 1px solid #ddd;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+    z-index: 1000;
+}
+
+    .custom-footer a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        .custom-footer a:hover {
+            text-decoration: underline;
+        }
+
+/* Headings */
+h1 {
+    color: #333;
+}
+/*==========Class list styling =============*/
+/* Class List Container */
+.class-list-container {
+    width: 90vw;
+    margin: 20px auto;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+}
+
+/*Course Title */
+.course-title {
+    font-size: 28px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Back Button */
+.back-button i {
+    color: #007bff !important;
+}
+
+/* Section Header (Instructor & Students) */
+.section-header {
+    font-weight: bold;
+    text-align: center;
+    padding: 12px 0;
+    position: relative;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1); 
+    margin-bottom: 8px;
+}
+
+/* First/Last Name */
+.name-label {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 5px;
+    padding-left: 8px;
+    color: #555;
+}
+
+/* User Container (for Instructor & Students) */
+.user-container {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background-color: #f0f0f0;
+    border-radius: 6px;
+    margin: 5px 0;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+
+/* Highlighting Checkbox Selection */
+.selected-row {
+    background-color: #cce5ff !important;
+}
+
+/* Remove Hover When Selected */
+.user-container:hover:not(.selected-row) {
+    background-color: #e0e0e0;
+}
+
+/* Checkbox Styling */
+.student-checkbox {
+    transform: scale(1.8);
+    margin-right: 12px;
+}
+
+/* Group Chat Button */
+.group-chat-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: none;
+}
+
+/* Modal overlay styling */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+/* Modal content styling */
+.modal-content {
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+    .modal-content h2 {
+        margin-top: 0;
+        margin-bottom: 15px;
+    }
+
+    .modal-content input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+
+    .modal-content .selected-users {
+        text-align: left;
+        font-size: 14px;
+        color: #333;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        padding: 8px;
+        border-radius: 4px;
+        background-color: #f9f9f9;
+    }
+
+    .modal-content .modal-buttons {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .modal-content button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+/* Group Chat Confirm Button */
+.btn-GCconfirm {
+    background-color: #007bff; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.1s ease-in-out;
+}
+
+    .btn-GCconfirm:hover {
+        background-color: #0056b3; 
+        transform: scale(1.05);
+    }
+
+    .btn-GCconfirm:active {
+        transform: scale(0.95);
+    }
+
+/*Group Chat Cancel Button */
+.btn-GCcancel {
+    background-color: #dc3545; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.1s ease-in-out;
+}
+
+    .btn-GCcancel:hover {
+        background-color: #b30021; 
+        transform: scale(1.05);
+    }
+
+    .btn-GCcancel:active {
+        transform: scale(0.95);
+    }
+
+
+
+
+/* Course Selection Styling */
+.course {
+    padding: 20px;
+    margin: 15px;
+    border-radius: 10px;
+    width: 300px;
+    height: 150px;
+    transition: all 0.3s ease;
+}
+
+    .course h3 {
+        margin-top: 10px;
+        color: #000;
+    }
+
+    .course:hover {
+        transform: scale(1.05);
+    }
+
+
+/* ==================Messaging Page====================== */
+.message-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+@media (min-width: 1200px) {
+    .message-container {
+        max-width: 800px;
+    }
+}
+/* MEDIA QUERRIES FOR MESSAGING CONTAINER*/
+@media (max-width: 1050px) {
+    .conversation-list-container {
+        width: 220px; 
+    }
+
+    .message-container {
+        margin-left: 240px; 
+        width: 70%; 
+    }
+}
+
+@media (max-width: 900px) {
+    .conversation-list-container {
+        width: 180px; 
+    }
+
+    .message-container {
+        margin-left: 200px; 
+        width: 75%; 
+    }
+}
+
+@media (max-width: 750px) {
+    .conversation-list-container {
+        width: 100%;
+        position: relative;
+        left: 0;
+        top: 0;
+        margin-bottom: 10px;
+    }
+
+    .message-container {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .message-wrapper:hover .message-actions {
+        display: none;
+    }
+
+    .message-wrapper.show-actions .message-actions {
+        display: block;
+    }
+}
+
+.message-textarea {
+    width: 100%;
+    min-height: 43px;
+    max-height: 150px;
+    height: 43px;
+    padding: 10px;
+    font-size: 14px;
+    border: 2px solid #ccc; 
+    border-radius: 5px;
+    line-height: 1.5;
+    font-family: inherit;
+    resize: none;
+    overflow-y: hidden; 
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s;
+}
+
+      /* focused border*/
+      .message-textarea:focus {
+       outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+    }
+
+
+.message-list {
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: 300px; 
+    min-height: 100px; 
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column-reverse;
+    scroll-behavior: smooth;
+}
+
+.message-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+    position: relative;
+    z-index: 1; 
+}
+.message-actions {
+    display: none;
+    position: absolute;
+    top: -24px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 2px 6px;
+    border-radius: 4px;
+    z-index: 100; 
+}
+/* bring hovered message and actions above others (for some reason needed now) */
+.message-wrapper:hover {
+    z-index: 10; 
+}
+
+.message-wrapper:hover .message-actions {
+    display: block;
+}
+.message-actions i {
+    color: #fff;
+    cursor: pointer;
+    margin-left: 5px;
+}
+/* Edited label for messages that have been modified */
+.edited-label {
+    font-style: italic;
+    font-size: 0.8em;
+    color: #888;
+    margin-left: 5px;
+}
+/* Deleted message styling */
+.deleted-message {
+    font-style: italic;
+    font-size: 0.9em;
+    color: #888;
+    text-align: center;
+    padding: 8px 12px;
+    border-radius: 15px;
+    background-color: #f0f0f0;
+}
+
+
+/* Sender Name & Timestamp */
+.message-info {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 2px;
+    margin-left: 8px;
+    line-height: 1;
+}
+
+/* Message Bubble */
+.message {
+    padding: 10px 14px;
+    border-radius: 18px;
+    max-width: 70%;
+    word-wrap: break-word;
+    white-space: normal;
+    text-align: left;
+    line-height: 1.4;
+    font-size: 14px;
+    display: block;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.2s, background-color 0.2s;
+}
+
+/* Sent Messages */
+.sent {
+    align-items: flex-end;
+}
+
+.sent-message {
+    background-color: #0078D4; 
+    color: white;
+    align-self: flex-end;
+    text-align: left;
+    padding: 10px 14px;
+    margin-right: 5px;
+    border-radius: 18px;
+}
+
+/* Received Messages */
+.received {
+    align-items: flex-start;
+}
+
+.received-message {
+    background-color: #f1f1f1;
+    color: black;
+    align-self: flex-start;
+    text-align: left;
+    padding: 10px 14px;
+    margin-left: 5px;
+    border-radius: 18px;
+}
+
+.add-message-form {
+    border-top: 1px solid #ddd;
+    padding: 12px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+    /* Input field */
+    .add-message-form input {
+        flex: 1;
+        background: #fafafa;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        padding: 10px 14px;
+        font-size: 16px;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+        .add-message-form input:focus {
+            outline: none;
+            border-color: #6264a7;
+            box-shadow: 0 0 0 3px rgba(98, 100, 167, 0.2);
+        }
+
+    /* Send button */
+    .add-message-form .send-btn {
+        background: #0078D4;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 42px;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: background 0.3s, box-shadow 0.3s, transform 0.1s ease-in-out;
+    }
+
+        .add-message-form .send-btn i {
+            color: white;
+            transition: color 0.2s;
+        }
+
+        .add-message-form .send-btn:hover {
+            background: #0056b3;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            transform: scale(1.05);
+        }
+
+        .add-message-form .send-btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(98, 100, 167, 0.3);
+        }
+
+        .add-message-form .send-btn:active {
+            transform: scale(0.95);
+        }
+
+
+
+/* Styling for message wrappers */
+.message-wrapper {
+    position: relative;
+    transition: opacity 0.3s ease-out;
+}
+/* Deleted message bubble styling */
+.deleted-message {
+    font-style: italic;
+    font-size: 0.9em;
+    color: #888;
+    text-align: center;
+    padding: 8px 12px;
+    border-radius: 15px;
+    background-color: #f0f0f0;
+}
+/* Modal overlay styling */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000; 
+}
+/* Modal content styling */
+.modal-content {
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+    .modal-content h2 {
+        margin-top: 0;
+    }
+
+    .modal-content button {
+        margin: 10px;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+.btn-confirm {
+    background-color: #d9534f;
+    color: #fff;
+}
+
+.btn-cancel {
+    background-color: #5bc0de;
+    color: #fff;
+}
+
+/*=============Login Page==================*/
+
+/* Container */
+.login-view-container {
+    max-width: 400px;
+    width: 90%;
+    background-color: #fff;
+    padding: 30px 25px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+    /* Title */
+    .login-view-container h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 28px;
+    }
+
+/* Form Group */
+.login-form-group {
+    margin-bottom: 20px;
+}
+
+/* Label */
+.login-view-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Input */
+.login-form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* Submit Button */
+.login-btn-primary {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .login-btn-primary:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 91, 187, 0.2);
+    }
+
+
+/* Validation Message */
+.login-validation-summary {
+    margin-top: 15px;
+    color: #dc3545;
+    font-size: 14px;
+    text-align: center;
+}
